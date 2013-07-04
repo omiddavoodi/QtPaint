@@ -14,6 +14,8 @@
 #include <QMenuBar>
 #include <QAction>
 #include <QFileDialog>
+#include <QColorDialog>
+#include <QComboBox>
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +38,8 @@ public:
     QLabel *brush_opacity_label;
     QSlider *slider_brush_opacity;
     QLineEdit *textedit_brush_opacity;
+    QLabel *zoom_label;
+    QComboBox *combo_zoom;
     QMenu *fileMenu;
     QMenu *imageMenu;
     QAction *newAct;
@@ -43,7 +47,10 @@ public:
     QAction *saveAct;
     QAction *exitAct;
     QAction *resizeAct;
+    QAction *invertAct;
+    QAction *colorAct;
     QFileDialog *fdialog;
+    QColorDialog *cdialog;
     ~MainWindow();
     
 private:
@@ -58,6 +65,10 @@ public slots:
     void newImage();
     void openImage();
     void saveImage();
+    void invertImage();
+    void showColorDialog(int);
+    void colorDialogAction();
+    void change_zoom(int);
 };
 
 #endif // MAINWINDOW_H

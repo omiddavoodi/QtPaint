@@ -24,6 +24,16 @@ resizeDialog::resizeDialog(int width, int height, QWidget *parent) :
     this->returnSize = QSize(0,0);
 }
 
+resizeDialog::~resizeDialog()
+{
+    delete wlabel;
+    delete hlabel;
+    delete wledit;
+    delete hledit;
+    delete ok;
+    delete cancel;
+}
+
 void resizeDialog::accept()
 {
     this->returnSize = QSize(QVariant(wledit->text()).toInt(),QVariant(hledit->text()).toInt());

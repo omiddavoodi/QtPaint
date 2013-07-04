@@ -18,6 +18,7 @@ public:
     QPushButton *ok;
     QPushButton *cancel;
     QSize returnSize;
+    ~resizeDialog();
 signals:
     
 public slots:

@@ -10,6 +10,7 @@
 #include <QPen>
 #include <QCursor>
 #include <QBitmap>
+#include <QImage>
 
 class myDrawWidget : public QGraphicsView
 {
@@ -17,10 +18,18 @@ class myDrawWidget : public QGraphicsView
     private:
         int image_width;
         int image_height;
+        int canvas_width;
+        int canvas_height;
+        int zoom_level;
+
         QPointF old_mouse_position;
         QPen *pen;
         QPen *pen2;
         QCursor *cur;
+
+        void updateHelperPixamp(int, int);
+        void updateHelperPixamp();
+        void updateZoomedPixmap();
     public:
         explicit myDrawWidget(QWidget *parent = 0);
 
@@ -29,6 +38,7 @@ class myDrawWidget : public QGraphicsView
 
         void mousePressEvent(QMouseEvent * event);
         void mouseMoveEvent(QMouseEvent * event);
+        void mouseReleaseEvent(QMouseEvent * event);
 
         void changePen(QPen npen);
         QPen getPen();
@@ -37,12 +47,18 @@ class myDrawWidget : public QGraphicsView
 
         QGraphicsScene *scene;
         QPixmap *pixmap;
+        QPixmap *helper_pixmap;
+        QPixmap *zoomed_pixmap;
         QGraphicsPixmapItem *pitem;
 
         void resizePicture(int width, int height);
         void clearImage();
         void loadImageFromFile(QString filename, const char * format = 0);
         void saveImageFile(QString filename, const char * format = 0);
+        void invertImage();
+        void setZoomLevel(int level);
+
+        ~myDrawWidget();
     signals:
 
     public slots:
