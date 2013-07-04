@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     drawwidget.cpp \
-    colorselector.cpp
+    colorselector.cpp \
+    resizedialog.cpp
 
 HEADERS  += mainwindow.h \
     drawwidget.h \
-    colorselector.h
+    colorselector.h \
+    resizedialog.h
 
 FORMS    +=

@@ -26,6 +26,9 @@ myDrawWidget::myDrawWidget(QWidget *parent) :
     cur = new QCursor(bitmap,bitmap,11,11);
 
     this->setCursor(*cur);
+
+    this->setResizeAnchor(QGraphicsView::AnchorViewCenter);
+    this->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
 }
 
 void myDrawWidget::set_image_width(int a)
@@ -40,7 +43,7 @@ void myDrawWidget::set_image_height(int a)
 
 void myDrawWidget::mousePressEvent(QMouseEvent *e)
 {
-    QPointF point = this->mapToScene(e->x(), e->y());
+    QPointF point = this->mapToScene(e->x()-(200-image_width)/2.0, e->y()-(150-image_height)/2.0);
     if (point.x() >= 0 && point.y() >= 0 && point.x() < this->image_width && point.y() < this->image_height)
     {
         QPainter qp;
@@ -56,7 +59,7 @@ void myDrawWidget::mousePressEvent(QMouseEvent *e)
 
 void myDrawWidget::mouseMoveEvent(QMouseEvent *e)
 {
-    QPointF point = this->mapToScene(e->x(), e->y());
+    QPointF point = this->mapToScene(e->x()-(200-image_width)/2.0, e->y()-(150-image_height)/2.0);
     if (point.x() >= 0 && point.y() >= 0 && point.x() < this->image_width && point.y() < this->image_height)
     {
         QPainter qp;
@@ -77,4 +80,31 @@ void myDrawWidget::changePen(QPen npen)
     this->pen->setColor(npen.color());
     this->pen->setCosmetic(npen.isCosmetic());
     this->pen->setWidth(npen.width());
+}
+
+QPen myDrawWidget::getPen()
+{
+    return *this->pen;
+}
+
+void myDrawWidget::resizePicture(int width, int height)
+{
+    int ow = pixmap->width(), oh = pixmap->height();
+    QPixmap *s = new QPixmap(width, height);
+    s->fill(Qt::white);
+    QPainter qp;
+    qp.begin(s);
+    qp.drawPixmap(0,0,*pixmap);
+    qp.end();
+    pixmap = new QPixmap(width,height);
+    qp.begin(pixmap);
+    qp.drawPixmap(0,0,*s);
+    qp.end();
+    delete s;
+    QPointF newpoint(pitem->offset().x()-(width-ow)/2.0,pitem->offset().y()-(height-oh)/2.0);
+    this->pitem->setPixmap(*pixmap);
+    pitem->setOffset(newpoint);
+    this->setSceneRect(newpoint.x(),newpoint.y(),width,height);
+    this->image_height = height;
+    this->image_width = width;
 }

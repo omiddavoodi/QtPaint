@@ -30,10 +30,13 @@ class myDrawWidget : public QGraphicsView
         void mouseMoveEvent(QMouseEvent * event);
 
         void changePen(QPen npen);
+        QPen getPen();
 
         QGraphicsScene *scene;
         QPixmap *pixmap;
         QGraphicsPixmapItem *pitem;
+
+        void resizePicture(int width, int height);
     signals:
 
     public slots:

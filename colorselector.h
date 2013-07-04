@@ -9,7 +9,7 @@ class ColorSelector : public QLabel
 
 public:
     int index;
-    ColorSelector(){};
+    ColorSelector(){}
     void mousePressEvent(QMouseEvent * event);
 signals:
     void pressed(int i);
