@@ -12,7 +12,7 @@ public:
     ColorSelector(){}
     void mousePressEvent(QMouseEvent * event);
 signals:
-    void pressed(int i);
+    void pressed(int i, bool left);
 };
 
 #endif // COLORSELECTOR_H

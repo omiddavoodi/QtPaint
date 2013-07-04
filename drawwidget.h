@@ -19,6 +19,7 @@ class myDrawWidget : public QGraphicsView
         int image_height;
         QPointF old_mouse_position;
         QPen *pen;
+        QPen *pen2;
         QCursor *cur;
     public:
         explicit myDrawWidget(QWidget *parent = 0);
@@ -31,12 +32,17 @@ class myDrawWidget : public QGraphicsView
 
         void changePen(QPen npen);
         QPen getPen();
+        void changeSecondaryPen(QPen npen);
+        QPen getSecondaryPen();
 
         QGraphicsScene *scene;
         QPixmap *pixmap;
         QGraphicsPixmapItem *pitem;
 
         void resizePicture(int width, int height);
+        void clearImage();
+        void loadImageFromFile(QString filename, const char * format = 0);
+        void saveImageFile(QString filename, const char * format = 0);
     signals:
 
     public slots:
