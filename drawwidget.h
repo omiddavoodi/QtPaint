@@ -22,10 +22,14 @@ class myDrawWidget : public QGraphicsView
         int canvas_height;
         int zoom_level;
 
-        QPointF old_mouse_position;
+        QPointF *old_mouse_position;
+        QPointF *point;
         QPen *pen;
         QPen *pen2;
         QCursor *cur;
+        QPainter qp;
+        QImage s;
+        QImage s2;
 
         void updateHelperPixamp(int, int);
         void updateHelperPixamp();

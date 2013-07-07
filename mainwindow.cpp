@@ -89,7 +89,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(slider_brush_opacity,SIGNAL(sliderMoved(int)),this,SLOT(changeBrushOpacitySlider(int)));
 
-    zoom_label = new QLabel("Zoom");
+    zoom_label = new QLabel("Zoom", toolbar);
     zoom_label->setGeometry(2 ,330,70,20);
 
     combo_zoom = new QComboBox(toolbar);
@@ -286,26 +286,26 @@ MainWindow::~MainWindow()
 {
     delete sdrawtable;
     delete toolbar;
-    delete[] colorselector;
-    delete[] colorpixmap;
-    delete[] color;
-    delete brush_size_label;
-    delete slider_brush_size;
-    delete textedit_brush_size;
-    delete brush_opacity_label;
-    delete slider_brush_opacity;
-    delete textedit_brush_opacity;
-    delete zoom_label;
-    delete combo_zoom;
+    //delete[] colorselector;
+    //delete[] colorpixmap;
+    //delete[] color;
+    //delete brush_size_label;
+    //delete slider_brush_size;
+    //delete textedit_brush_size;
+    //delete brush_opacity_label;
+    //delete slider_brush_opacity;
+    //delete textedit_brush_opacity;
+    //delete zoom_label;
+    //delete combo_zoom;
     delete fileMenu;
     delete imageMenu;
-    delete newAct;
-    delete openAct;
-    delete saveAct;
-    delete exitAct;
-    delete resizeAct;
-    delete invertAct;
-    delete colorAct;
+    //delete newAct;
+    //delete openAct;
+    //delete saveAct;
+    //delete exitAct;
+    //delete resizeAct;
+    //delete invertAct;
+    //delete colorAct;
     delete fdialog;
     delete cdialog;
 }
