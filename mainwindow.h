@@ -16,6 +16,7 @@
 #include <QFileDialog>
 #include <QColorDialog>
 #include <QComboBox>
+#include "sliderdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -49,6 +50,9 @@ public:
     QAction *resizeAct;
     QAction *invertAct;
     QAction *colorAct;
+    QAction *hueAct;
+    QAction *saturationAct;
+    QAction *lightnessAct;
     QFileDialog *fdialog;
     QColorDialog *cdialog;
     ~MainWindow();
@@ -66,6 +70,9 @@ public slots:
     void openImage();
     void saveImage();
     void invertImage();
+    void changeHue();
+    void changeSaturation();
+    void changeLightness();
     void showColorDialog(int);
     void colorDialogAction();
     void change_zoom(int);

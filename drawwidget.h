@@ -60,6 +60,9 @@ class myDrawWidget : public QGraphicsView
         void loadImageFromFile(QString filename, const char * format = 0);
         void saveImageFile(QString filename, const char * format = 0);
         void invertImage();
+        void changeHue(int hue);
+        void changeSaturation(int sat);
+        void changeLightness(int lig);
         void setZoomLevel(int level);
 
         ~myDrawWidget();

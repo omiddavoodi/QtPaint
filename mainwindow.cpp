@@ -132,21 +132,35 @@ MainWindow::MainWindow(QWidget *parent) :
 
     fileMenu = this->menuBar()->addMenu(tr("&File"));
     newAct = fileMenu->addAction(tr("&New"));
+    newAct->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_N));
     connect(newAct,SIGNAL(triggered()),this,SLOT(newImage()));
     openAct = fileMenu->addAction(tr("&Open"));
+    openAct->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_O));
     connect(openAct,SIGNAL(triggered()),this,SLOT(openImage()));
     saveAct = fileMenu->addAction(tr("&Save"));
+    saveAct->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_S));
     connect(saveAct,SIGNAL(triggered()),this,SLOT(saveImage()));
+    fileMenu->addSeparator();
     exitAct = fileMenu->addAction(tr("&Exit"));
     connect(exitAct,SIGNAL(triggered()),this,SLOT(close()));
 
     imageMenu = this->menuBar()->addMenu(tr("&Image"));
     resizeAct = imageMenu->addAction(tr("&Resize"));
+    resizeAct->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_R));
     connect(resizeAct, SIGNAL(triggered()),this,SLOT(resizeImage()));
+    imageMenu->addSeparator();
     invertAct = imageMenu->addAction(tr("&Invert"));
     connect(invertAct, SIGNAL(triggered()),this,SLOT(invertImage()));
+    imageMenu->addSeparator();
     colorAct = imageMenu->addAction(tr("&Color"));
     connect(colorAct, SIGNAL(triggered()),this,SLOT(colorDialogAction()));
+    imageMenu->addSeparator();
+    hueAct = imageMenu->addAction(tr("&Hue"));
+    connect(hueAct,SIGNAL(triggered()),this, SLOT(changeHue()));
+    saturationAct = imageMenu->addAction(tr("&Saturation"));
+    connect(saturationAct,SIGNAL(triggered()),this, SLOT(changeSaturation()));
+    lightnessAct = imageMenu->addAction(tr("&Lightness"));
+    connect(lightnessAct,SIGNAL(triggered()),this, SLOT(changeLightness()));
 
 }
 
@@ -242,6 +256,45 @@ void MainWindow::saveImage()
 void MainWindow::invertImage()
 {
     this->sdrawtable->invertImage();
+}
+
+void MainWindow::changeHue()
+{
+    sliderdialog *slid;
+    slid = new sliderdialog(this);
+    slid->setMax(360);
+    slid->setMin(0);
+    slid->setCurrent(0);
+    slid->exec();
+    this->sdrawtable->changeHue(slid->getResultValue());
+
+    delete slid;
+}
+
+void MainWindow::changeSaturation()
+{
+    sliderdialog *slid;
+    slid = new sliderdialog(this);
+    slid->setMax(100);
+    slid->setMin(-100);
+    slid->setCurrent(0);
+    slid->exec();
+    this->sdrawtable->changeSaturation(slid->getResultValue());
+
+    delete slid;
+}
+
+void MainWindow::changeLightness()
+{
+    sliderdialog *slid;
+    slid = new sliderdialog(this);
+    slid->setMax(100);
+    slid->setMin(-100);
+    slid->setCurrent(0);
+    slid->exec();
+    this->sdrawtable->changeLightness(slid->getResultValue());
+
+    delete slid;
 }
 
 void MainWindow::showColorDialog(int i)

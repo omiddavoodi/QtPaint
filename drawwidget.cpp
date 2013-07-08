@@ -240,6 +240,81 @@ void myDrawWidget::invertImage()
 
 }
 
+void myDrawWidget::changeHue(int hue)
+{
+    if (hue != 0)
+    {
+        s = pixmap->toImage();
+        for (int x = 0; x < s.width(); ++x)
+        {
+            for (int y = 0; y < s.height(); ++y)
+            {
+                QColor temp = QColor(s.pixel(x,y)).toHsl();
+                temp.setHsl(hue + temp.hue(),temp.saturation(),temp.lightness());
+                s.setPixel(x,y,(uint)(temp.toRgb().rgb()));
+            }
+        }
+        qp.begin(pixmap);
+        qp.drawPixmap(0,0,QPixmap::fromImage(s));
+        qp.end();
+        updateHelperPixamp();
+        updateZoomedPixmap();
+        this->pitem->setPixmap(*zoomed_pixmap);
+    }
+}
+
+void myDrawWidget::changeSaturation(int sat)
+{
+    if (sat != 0)
+    {
+        s = pixmap->toImage();
+        for (int x = 0; x < s.width(); ++x)
+        {
+            for (int y = 0; y < s.height(); ++y)
+            {
+                QColor temp = QColor(s.pixel(x,y)).toHsl();
+                if (sat > 0)
+                    temp.setHsl(temp.hue(),(int)(sat/100.0*(100-temp.saturation())) + temp.saturation(),temp.lightness());
+                else
+                    temp.setHsl(temp.hue(),(int)(sat/100.0*(temp.saturation())) + temp.saturation(),temp.lightness());
+                s.setPixel(x,y,(uint)(temp.toRgb().rgb()));
+            }
+        }
+        qp.begin(pixmap);
+        qp.drawPixmap(0,0,QPixmap::fromImage(s));
+        qp.end();
+        updateHelperPixamp();
+        updateZoomedPixmap();
+        this->pitem->setPixmap(*zoomed_pixmap);
+    }
+}
+
+void myDrawWidget::changeLightness(int lig)
+{
+    if (lig != 0)
+    {
+        s = pixmap->toImage();
+        for (int x = 0; x < s.width(); ++x)
+        {
+            for (int y = 0; y < s.height(); ++y)
+            {
+                QColor temp = QColor(s.pixel(x,y)).toHsl();
+                if (lig > 0)
+                    temp.setHsl(temp.hue(),temp.saturation(),(int)(lig/100.0*(255-temp.lightness())) + temp.lightness());
+                else
+                    temp.setHsl(temp.hue(),temp.saturation(),(int)(lig/100.0*(temp.lightness())) + temp.lightness());
+                s.setPixel(x,y,(uint)(temp.toRgb().rgb()));
+            }
+        }
+        qp.begin(pixmap);
+        qp.drawPixmap(0,0,QPixmap::fromImage(s));
+        qp.end();
+        updateHelperPixamp();
+        updateZoomedPixmap();
+        this->pitem->setPixmap(*zoomed_pixmap);
+    }
+}
+
 void myDrawWidget::setZoomLevel(int level)
 {
     this->zoom_level = level;

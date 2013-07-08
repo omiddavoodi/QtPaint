@@ -16,11 +16,18 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     drawwidget.cpp \
     colorselector.cpp \
-    resizedialog.cpp
+    resizedialog.cpp \
+    sliderdialog.cpp
 
 HEADERS  += mainwindow.h \
     drawwidget.h \
     colorselector.h \
-    resizedialog.h
+    resizedialog.h \
+    sliderdialog.h
 
 FORMS    +=
+
+OTHER_FILES += \
+    resources.rc
+
+win32:RC_FILE += resources.rc
